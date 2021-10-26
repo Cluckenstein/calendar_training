@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    environment:
+      TZ: "Europe/Berlin"
+    build: .
+    restart: always
+    privileged: false
+    ports:
+      - "5010:80"
