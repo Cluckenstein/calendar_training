@@ -18,7 +18,7 @@ from html.parser import HTMLParser
 import numpy as np
 
 
-def get_scheduled(base_url = 'https://whats.todaysplan.com.au', offset = 0, max_count = 70, include_completed = False):
+def get_scheduled(base_url = 'https://whats.todaysplan.com.au', offset = 0, max_count = 70, include_completed = True):
     """
     Here the post request is send to get the scheduled workouts and relevant details
     Args:
@@ -205,7 +205,7 @@ def parse_workouts(data):
 
 
 
-def provide_calender_file(scheduled_workouts, summary):
+def provide_calender_file(scheduled_workouts, summary, show_completed = False):
     """
     In this function the parsed workouts are worked into a .ics file format and saved at specified place
     Args:
@@ -226,7 +226,7 @@ def provide_calender_file(scheduled_workouts, summary):
 
     for workout in scheduled_workouts:
         event = Event()
-        if workout['scheduled'] and workout['completed']:
+        if workout['scheduled'] and workout['completed'] and show_completed:
             if str(workout['sport']) == 'Gym':
                 dist = ''
                 dist_d = ''
