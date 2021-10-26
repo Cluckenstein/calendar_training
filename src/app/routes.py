@@ -22,8 +22,8 @@ def update():
         file : .ics file in which the past 7 and future 14 days are marked
     """
 
-    workouts, _ = get_scheduled()
-    calendar_file_path = provide_calender_file(workouts)
+    workouts, _, summary = get_scheduled()
+    calendar_file_path = provide_calender_file(workouts, summary)
 
     return send_file('calendar_folder/'+calendar_file_path)
 
