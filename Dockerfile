@@ -28,6 +28,6 @@ COPY . /src
 WORKDIR /src
 RUN chmod -R 777 ./
 
-#ENTRYPOINT [ "python3" ]
-#CMD [ "flask_webserver.py" ]
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT [ "python3" ]
+CMD [ "flask_webserver.py" ]
+#CMD ["/usr/bin/supervisord"] 
