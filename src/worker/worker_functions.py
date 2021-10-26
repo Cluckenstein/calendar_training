@@ -226,6 +226,7 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
 
     for workout in scheduled_workouts:
         event = Event()
+
         if workout['scheduled'] and workout['completed'] and show_completed:
             if str(workout['sport']) == 'Gym':
                 dist = ''
@@ -244,11 +245,18 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
             #+ workout['equipment'] 
 
             event.add('dtend', workout['start'] + workout['c_duration']) # datetime object
+            event.add('status', 'CONFIRMED')
+            event.add('summary', event_name) # name of the event
+            event.add('description', event_description) # descirption
+            event.add('dtstart', workout['start']) # datetime object
+            event.add('uid', id_generator())
+
+            current_calender.add_component(event)
 
 
 
-
-        elif workout['scheduled']:
+        elif workout['scheduled'] and not workout['completed'] and \
+        not workout['start'] < (datetime(datetime.now().year, datetime.now().month, datetime.now().day) - timedelta(days=2)):
             if str(workout['sport']) == 'Gym':
                 dist = ''
             else:
@@ -269,14 +277,13 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
                 event_description = workout['description']
                 event.add('transp','TRANSPARENT')
 
+            event.add('status', 'CONFIRMED')
+            event.add('summary', event_name) # name of the event
+            event.add('description', event_description) # descirption
+            event.add('dtstart', workout['start']) # datetime object
+            event.add('uid', id_generator())
 
-        event.add('status', 'CONFIRMED')
-        event.add('summary', event_name) # name of the event
-        event.add('description', event_description) # descirption
-        event.add('dtstart', workout['start']) # datetime object
-        event.add('uid', id_generator())
-
-        current_calender.add_component(event)
+            current_calender.add_component(event)
 
 
     for week in summary:
