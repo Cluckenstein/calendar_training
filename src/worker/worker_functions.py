@@ -289,11 +289,11 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
     for week in summary:
         monday = monday_of_week(week)
 
-        sum_string = 'Scheduled:\n'\
+        sum_string = 'Scheduled\n'\
             + str(summary[week]['scheduled']['time'])[:-3] + 'h\n'\
             + 'Run: '+ str(int(summary[week]['scheduled']['distance']['run'])) + ' km\n'\
             + 'Ride: '+ str(int(summary[week]['scheduled']['distance']['ride'])) + ' km\n\n'\
-            'Completed:\n'\
+            'Completed\n'\
             + str(summary[week]['completed']['time'])[:-3] + 'h\n'\
             + 'Run: '+ str(int(summary[week]['completed']['distance']['run'])) + ' km\n'\
             + 'Ride: '+ str(int(summary[week]['completed']['distance']['ride'])) + ' km\n\n'\
