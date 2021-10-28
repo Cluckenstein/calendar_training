@@ -347,9 +347,9 @@ def post_auth():
     req_url = '/rest/auth/login'
 
     if platform == 'darwin':
-        cred_path = 'credentials.json' #local test
+        cred_path = 'conf/credentials.json' #local test
     else:
-        cred_path = 'src/credentials.json' #serverside
+        cred_path = 'src/conf/credentials.json' #serverside
 
     with open(cred_path) as cred:
         auth_data = json.load(cred)
