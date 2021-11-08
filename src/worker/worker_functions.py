@@ -303,8 +303,8 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
         event.add('status', 'CONFIRMED')
         event.add('summary', 'Training Summary') # name of the event
         event.add('description', sum_string) # descirption
-        event.add('dtstart', monday) # datetime object
-        event.add('dtend', monday + timedelta(seconds=86400)) # datetime object
+        event.add('dtstart', date(monday.year, monday.month, monday.day)) # datetime object
+        #event.add('dtend', monday + timedelta(seconds=86400)) # datetime object
         event.add('uid', id_generator())
         current_calender.add_component(event)
 
@@ -319,8 +319,9 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
 
     file_name = 'cur_calendar_%s.ics'%(str(datetime.now())[11:19])
     text_calendar = current_calender.to_ical().decode('utf-8')
+    
     text_calendar = text_calendar.replace(';VALUE=DATE-TIME:', ':').replace('/nDESCRIPTION','Z/nDESCRIPTION').replace('/nDTEND','Z/nDTEND')
-
+    
     if 'Restday' in text_calendar:
         text_calendar = text_calendar.replace('T000000', '')
 

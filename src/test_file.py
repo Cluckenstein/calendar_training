@@ -5,6 +5,6 @@ import requests
 
 
 
-test,a, summary = get_scheduled(include_completed=True)
+test,a, summary = get_scheduled(include_completed=False)
 calendar_file_path = provide_calender_file(test, summary)
 
