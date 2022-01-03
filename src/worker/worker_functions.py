@@ -12,6 +12,7 @@ from datetime import datetime,timedelta,date
 import json
 import string
 import random
+import os 
 from sys import platform
 from io import StringIO
 from html.parser import HTMLParser
@@ -308,10 +309,6 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
         event.add('uid', id_generator())
         current_calender.add_component(event)
 
-
-
-
-
     if platform == 'darwin':
         folder_path = 'app/calendar_folder/' 
     else:
@@ -324,6 +321,12 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
     
     if 'Restday' in text_calendar:
         text_calendar = text_calendar.replace('T000000', '')
+        
+    dir_volume = os.listdir(folder_path) 
+    if len(dir_volume) > 100:
+        for fil in dir_volume:
+            os.remove(folder_path + fil)
+        
 
     with open(folder_path + file_name, 'wb') as ics:
         ics.write(text_calendar.encode('utf-8'))
