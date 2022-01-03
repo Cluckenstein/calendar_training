@@ -8,7 +8,7 @@ RUN pip3 install uwsgi
 
 COPY ./requirements.txt /src/requirements.txt
 
-ENV PYTHONUNBUFFERED=0
+ENV PYTHONUNBUFFERED=1
 RUN pip3 install --upgrade pip
 RUN pip3 install -r /src/requirements.txt
 
