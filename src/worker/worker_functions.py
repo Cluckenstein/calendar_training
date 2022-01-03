@@ -270,7 +270,7 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
             + str(workout['distance'])+ ' km\n'\
             + workout['sport'] + '\n'
             #+ workout['equipment'] 
-
+            print(workout)
             event.add('dtend', workout['start'] + workout['duration']) # datetime object
 
             if workout['type'] == 'rest':
