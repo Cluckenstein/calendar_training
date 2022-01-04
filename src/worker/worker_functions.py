@@ -263,9 +263,6 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
             else:
                 dist = ' | ' + str(np.round(workout['distance'],1))+ 'km'
 
-            if type(workout['duration'] == str):
-                workout['duration'] = timedelta(hours= 2)
-
             event_name = workout['sport'] + ' | ' + str(workout['duration'])[:-3] + 'h' + dist
             event_description = workout['description'] + '\n\n'\
             + str(workout['trainingScore']) + ' TSS\n'\
@@ -274,7 +271,10 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
             + workout['sport'] + '\n'
             #+ workout['equipment'] 
 
-            event.add('dtend', workout['start'] + workout['duration']) # datetime object
+            try:
+                event.add('dtend', workout['start'] + workout['duration']) # datetime object
+            except:
+                event.add('dtend', workout['start'] + timedelta(hours = 2))
 
             if workout['type'] == 'rest':
                 event_name = 'Restday'
