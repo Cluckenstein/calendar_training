@@ -261,7 +261,10 @@ def provide_calender_file(scheduled_workouts, summary, show_completed = False):
             if str(workout['sport']) == 'Gym':
                 dist = ''
             else:
-                dist = ' | ' + str(np.round(workout['distance'],1))+ 'km'
+                try:
+                    dist = ' | ' + str(np.round(workout['distance'],1))+ 'km'
+                except:
+                    dist = ""
 
             event_name = workout['sport'] + ' | ' + str(workout['duration'])[:-3] + 'h' + dist
             event_description = workout['description'] + '\n\n'\
